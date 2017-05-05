@@ -1,4 +1,4 @@
-## simple_portfolio
+## Simple Stock Portfolio
 
 Translates content in one file format, to another file format (e.g. pdf to word)
 
