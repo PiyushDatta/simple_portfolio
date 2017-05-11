@@ -1,6 +1,7 @@
 ## Simple Stock Portfolio
 
-Translates content in one file format, to another file format (e.g. pdf to word)
+A simple portfolio that returns total return, total risk-adjusted returns, and all greek-symbols (alpha, delta, beta, etc.).
+Should provide simplicity, speed, and ease of use for the user.
 
 ## Getting Started
 
