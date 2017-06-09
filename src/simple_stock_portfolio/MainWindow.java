@@ -1,55 +1,72 @@
+
 package simple_stock_portfolio;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-// Where the main run function for the application will lie
-public class MainWindow extends JFrame{
-	public void init(){
+public class MainWindow implements ActionListener {
 
-		// Initial window
-		JFrame startFrame = new JFrame("P.D");
-		startFrame.setSize(1200, 800);
+	private JPanel mainPanel;
+	private static MainWindow mainW;
+	protected static JPanel mainWGUI = MainWindow.createAndShowMainWGUI();
 
+	private JPanel prepareMainWGUI() {
 
-		// Panel to hold our buttons
-		JPanel startPanel = new JPanel();
-		startFrame.add(startPanel);
+		mainPanel = new JPanel(new GridBagLayout());
 
-		// Password and text field for username and password
-		JTextField userName = new JTextField(15);
-		JLabel txtUser = new JLabel("Username: ");
-		JPasswordField passWord = new JPasswordField(15);
-		JLabel txtPassword = new JLabel("Password: ");
-		startPanel.add(userName);
-		startPanel.add(txtUser);
-		startPanel.add(passWord);
-		startPanel.add(txtPassword);
-
-		// Button to login
+		// Button for logging in, with respective GridBagConstraint
+		// setFocusable is set to false to take out the border around the text
 		JButton loginButton = new JButton("Login");
-		startPanel.add(loginButton);
-
-		// Make everything centered
-		startFrame.setLayout( new GridBagLayout());
-		startFrame.add(txtUser, new GridBagConstraints());
-		startFrame.add(userName, new GridBagConstraints());
-		startFrame.add(txtPassword, new GridBagConstraints());
-		startFrame.add(passWord, new GridBagConstraints());
-		startFrame.add(loginButton, new GridBagConstraints());
-
-		//getContentPane().add(startPanel);
-		startFrame.setVisible(true);
-		startFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-		// Take out the border around the text
+		loginButton.addActionListener(this::actionPerformed);
+		loginButton.setActionCommand("Open");
+		GridBagConstraints lButtonC = new GridBagConstraints();
 		loginButton.setFocusable(false);
 
-	}
-	public static void main(String[] args) {
-		// Run the program
-		new MainWindow().init();
+		// Username text-field and JLabel with respective GridBagConstraints
+		JTextField tfUsername = new JTextField(15);
+		GridBagConstraints tfUserC = new GridBagConstraints();
+		JLabel txtUser = new JLabel("Username: ");
+		GridBagConstraints txtUserC = new GridBagConstraints();
 
+		// Password text-field and JLabel with respective GridBagConstraints
+		JPasswordField tfPassword = new JPasswordField(15);
+		GridBagConstraints tfPassC = new GridBagConstraints();
+		JLabel txtPassword = new JLabel("Password: ");
+		GridBagConstraints txtPassC = new GridBagConstraints();
+
+		// GridBagConstraints c = new GridBagConstraints();
+		// c.anchor = GridBagConstraints.HORIZONTAL;
+		// c.gridx = 0;
+		// c.gridy = 0;
+		// c.insets = new Insets(5, 5, 5, 5);
+
+		// Add all components to the JFrame
+		// Making sure to add the text before the text-fields
+		mainPanel.add(txtUser, txtUserC);
+		// mainPanel.add(tfUsername, tfUserC);
+		// mainPanel.add(txtPassword, txtPassC);
+		// mainPanel.add(tfPassword, tfPassC);
+		// mainPanel.add(loginButton, lButtonC);
+
+		return mainPanel;
+	}
+
+	// Instructions
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String cmd = e.getActionCommand();
+		// if (cmd.equals("Open")) {
+		// new MainWindow();
+		// MainWindow.createAndShowMainWGUI();
+		// }
+	}
+
+	// Callable from Main class
+	public static JPanel createAndShowMainWGUI() {
+		mainW = new MainWindow();
+		return mainW.prepareMainWGUI();
 	}
 
 }
